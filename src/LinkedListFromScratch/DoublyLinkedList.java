@@ -16,10 +16,8 @@ package LinkedListFromScratch;
 
 public class DoublyLinkedList {
     public Node1 head;
-    public Node1 tail;
 
     DoublyLinkedList(int data){
-        tail= null;
         Node1 a = new Node1(data);
         head = a;
     }
@@ -28,7 +26,35 @@ public class DoublyLinkedList {
         node.next = head;
         head.previous = node;
         head = node;
+    }
 
+    public void addEnd(Node1 node){
+       Node1 temp = head;
+       while(temp.next != null){
+           temp = temp.next;
+        }
+       temp.next = node;
+        node.previous = temp;
+    }
+
+    public void addWhereIWant(Node1 newNode, Node1 refNode ){
+       Node1 temp = head;
+       while(temp.next != refNode){
+           temp = temp.next;
+       }
+
+      newNode.next =  refNode.next;
+       refNode.next.previous = newNode;
+       newNode.previous = refNode;
+       refNode.next = newNode;
+    }
+
+    public void deleteWhereIWant(Node1 toBeDeletedNode ){
+        if(toBeDeletedNode == head){
+            head = toBeDeletedNode.next;
+        } else {
+            toBeDeletedNode.previous.next = toBeDeletedNode.next;
+        }
 
 
     }
